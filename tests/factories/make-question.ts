@@ -5,15 +5,18 @@ import {faker} from "@faker-js/faker"
 
 
 export function makeQuestion (
-    override: Partial<QuestionProps> = {}
+    override: Partial<QuestionProps> = {},
+    id?: UniqueEntityID
 ){
     const question = Question.create({
-        title: faker.,
+        title: faker.lorem.sentence(),
         slug: Slug.create("example-question"),
         authorId: new UniqueEntityID('1'),
-        content: "New Question",
+        content: faker.lorem.text(),
         ...override
-    })
+    },
+    id
+)
 
     return question
 }

@@ -2,15 +2,15 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { DeleteAnswerCommentUseCase } from "./delete-answer-comment";
 import { makeAnswerComment } from "tests/factories/make-answer-comment";
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
-import { InMemoryAnswerCommentRepository } from "tests/repositories/in-memory-answers-comments-repository";
+import { InMemoryAnswerCommentsRepository } from "tests/repositories/in-memory-answers-comments-repository";
 
-let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentRepository;
+let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository;
 let sut: DeleteAnswerCommentUseCase;
 
 describe("Delete Answer Comment", () => {
     beforeEach(() => {
         inMemoryAnswerCommentsRepository =
-            new InMemoryAnswerCommentRepository();
+            new InMemoryAnswerCommentsRepository();
 
         sut = new DeleteAnswerCommentUseCase(inMemoryAnswerCommentsRepository);
     });

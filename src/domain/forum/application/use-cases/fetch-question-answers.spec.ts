@@ -16,42 +16,42 @@ describe("Fetch Question Answers", async () => {
     it("Should be able to fetch recent questions", async () => {
         await inMemoryAnswersRepository.create(
             makeAnswer({
-                questionId: new UniqueEntityID("question-1")
-            })
+                questionId: new UniqueEntityID("question-1"),
+            }),
         );
         await inMemoryAnswersRepository.create(
             makeAnswer({
-                questionId: new UniqueEntityID("question-1")
-            })
+                questionId: new UniqueEntityID("question-1"),
+            }),
         );
         await inMemoryAnswersRepository.create(
             makeAnswer({
-                questionId: new UniqueEntityID("question-1")
-            })
+                questionId: new UniqueEntityID("question-1"),
+            }),
         );
 
-        const { answers } = await sut.execute({
+        const result = await sut.execute({
             questionId: "question-1",
-            page: 1
+            page: 1,
         });
 
-        expect(answers).toHaveLength(3);
+        expect(result.value?.answers).toHaveLength(3);
     });
 
     it("Should be able to fetch paginated question answers", async () => {
         for (let i = 1; i <= 22; i++) {
             await inMemoryAnswersRepository.create(
                 makeAnswer({
-                    questionId: new UniqueEntityID("question-1")
-                })
+                    questionId: new UniqueEntityID("question-1"),
+                }),
             );
         }
 
-        const { answers } = await sut.execute({
+        const result = await sut.execute({
             page: 2,
-            questionId: "question-1"
+            questionId: "question-1",
         });
 
-        expect(answers).toHaveLength(2);
+        expect(result.value?.answers).toHaveLength(2);
     });
 });
